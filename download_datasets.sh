@@ -2,22 +2,26 @@
 
 # Verificar si se proporcionó un argumento
 if [ -z "$1" ]; then
-    echo "Uso: $0 {100k|20m}"
+    echo "Uso: $0 {100k|20m|latest}"
     exit 1
 fi
 
 # Definir URL y nombre de archivo según el argumento
 case "$1" in
     "100k")
-        URL="https://files.grouplens.org/datasets/movielens/ml-latest-small.zip"
-        ZIP_FILE="ml-latest-small.zip"
+        URL="https://files.grouplens.org/datasets/movielens/ml-100k.zip"
+        ZIP_FILE="ml-100k.zip"
         ;;
     "20m")
+        URL="https://files.grouplens.org/datasets/movielens/ml-20m.zip"
+        ZIP_FILE="ml-30m.zip"
+        ;;
+    "latest")
         URL="https://files.grouplens.org/datasets/movielens/ml-latest.zip"
         ZIP_FILE="ml-latest.zip"
         ;;
     *)
-        echo "Error: Opción inválida. Usa '100k' o '20m'."
+        echo "Error: Opción inválida. Usa '100k', '30m' o 'latest'."
         exit 1
         ;;
 esac
@@ -46,6 +50,7 @@ else
     exit 1
 fi
 
+# Verificar o crear directorio de datos
 DATA_DIR="./src/HP-MOEA/data"
 if [ ! -d "$DATA_DIR" ]; then
     echo "El directorio $DATA_DIR no existe. Creándolo..."

@@ -16,7 +16,7 @@ def main(dataset_path = '../../datasets/ml-100k/ratings.csv', output_path = './d
 
     print("\nTamaño del dataframe original:", len(df_og))
 
-    df_item_info = pd.read_csv(dataset_100k_item_info_path)
+    #df_item_info = pd.read_csv(dataset_100k_item_info_path)
 
     print("Eliminando la columna 'timestamp'")
     df_og = df_og.drop(columns='timestamp')
@@ -104,7 +104,7 @@ def main(dataset_path = '../../datasets/ml-100k/ratings.csv', output_path = './d
     users2movie_ratings.set_users(valid_users)
 
     print(f"Cantidad de usuarios eliminados por solo tener newcomers: {cant_usuarios - len(valid_users)}")
-
+    """
     for movie in movies_info.get_all_movies():
         movie_id = movie.get_id()
         movie_details = df_item_info[df_item_info.iloc[:, 0] == movie_id].iloc[:, 2:].astype(bool).any(axis=0)
@@ -121,7 +121,7 @@ def main(dataset_path = '../../datasets/ml-100k/ratings.csv', output_path = './d
         for details in movie_details:
             binary_or_result |= details
         user.set_ADN(binary_or_result)
-
+    """
     print("\nGuardando los datos procesados en formato JSON...")
 
     if not os.path.exists(output_path):
